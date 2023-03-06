@@ -36,3 +36,23 @@ adminApp.get('/', (req, res) => {
 // start the server
 app.listen(3000);
 ```
+
+## Use during development and non-Google cloud environments
+
+The library using the Firebase Admin SDK, which requires credentials when running outside Google
+environments (including local development). The easiest way to do this is by getting Admin SDK
+service account credentials as a `.json` file (via the Firebase console) and setting the
+`GOOGLE_APPLICATION_CREDENTIALS` environment variable to its path:
+
+```sh
+GOOGLE_APPLICATION_CREDENTIALS=./path/to/service-account.json npm run dev
+```
+
+Failing to set this up will throw errors that look like this:
+
+```json
+{
+  "code": "auth/internal-error",
+  "message": "//cloud.google.com/docs/authentication/. If you are getting this error with curl or similar tools, you may need to specify 'X-Goog-User-Project' HTTP header..."
+}
+```
