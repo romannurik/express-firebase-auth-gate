@@ -11,6 +11,14 @@ This library creates an Express app with middleware that:
 3. Sets a session cookie and passes auth credentials to your handlers, via `req.auth`.
 4. Exposes additional routes, such as a sign out link (`<mount path>/__signout?redirect=/`)
 
+## Installation
+
+Just install it with:
+
+```sh
+npm install express-firebase-auth-gate
+```
+
 ## Example usage
 
 ```js
