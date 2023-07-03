@@ -82,7 +82,7 @@ export default function ({ firebaseConfig, sessionMaxAge, authorize, onForbidden
 
   // Main middleware
   gatedApp.use(cookieParser() as any, async (req, res, next) => {
-    if (req.url === SET_COOKIE_PATH || req.url === SIGN_OUT_PATH) {
+    if (req.path === SET_COOKIE_PATH || req.path === SIGN_OUT_PATH) {
       next();
       return;
     }
@@ -101,7 +101,9 @@ export default function ({ firebaseConfig, sessionMaxAge, authorize, onForbidden
         if (onForbidden) {
           onForbidden(req, res, () => { });
         } else {
-          res.status(403).send('Access forbidden');
+          res.status(403).type('html').send(`<!doctype html><html><body>
+Access forbidden. <a href="${signOutLink('/')}">Sign out</a>
+</body></html>`);
         }
         return;
       }
