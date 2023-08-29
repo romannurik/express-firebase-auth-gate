@@ -1,6 +1,6 @@
 {
   "name": "express-firebase-auth-gate",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Protect access to Express apps using Firebase Auth (Google Sign-In)",
   "source": "src/index.ts",
   "main": "dist/index.js",

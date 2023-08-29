@@ -23,7 +23,7 @@ npm install express-firebase-auth-gate
 
 ```js
 import express from 'express';
-import makeAdminApp from 'express-firebase-auth-gate';
+import makeAdminApp, { firebaseAuthSigninHelpers } from 'express-firebase-auth-gate';
 
 const app = express();
 
@@ -40,6 +40,10 @@ adminApp.get('/', (req, res) => {
   const { picture, name, email } = req.auth; // access sign in details
   res.status(200).type('html').send(`<b>Logged in as ${name}!</b>`);
 });
+
+// Want to also host the Firebase auth helpers on your domain? Just
+// remove `authDomain` from the `firebaseConfig` above and add this:
+app.use(firebaseAuthSigninHelpers);
 
 // start the server
 app.listen(3000);

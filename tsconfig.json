@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node"
   },
   "exclude": [
