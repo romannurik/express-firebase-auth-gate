@@ -17,4 +17,5 @@
 import makeGatedApp from './make-gated-app';
 export default makeGatedApp;
 
+export { AuthDetails, Options } from './make-gated-app';
 export { firebaseAuthSigninHelpers } from './signin-helpers';
