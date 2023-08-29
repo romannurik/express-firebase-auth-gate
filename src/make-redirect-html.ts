@@ -15,7 +15,14 @@
  */
 import type { Options } from './make-gated-app';
 
-export function makeRedirectHtml({ options: { firebaseConfig, alwaysShowAccountPicker }, setCookieUrl }: {
+export function makeRedirectHtml({
+  options: {
+    firebaseConfig,
+    selfHostedAuthHelper,
+    alwaysShowAccountPicker
+  },
+  setCookieUrl
+}: {
   options: Options,
   setCookieUrl: string
 }) {
@@ -24,8 +31,9 @@ export function makeRedirectHtml({ options: { firebaseConfig, alwaysShowAccountP
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script>
     let firebaseConfig = ${JSON.stringify(firebaseConfig)};
-    firebaseConfig.authDomain = firebaseConfig.authDomain || window.location.host;
-
+    ${selfHostedAuthHelper
+      ? `if (!window.location.port) firebaseConfig.authDomain = window.location.host;`
+      : ''}
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     let provider = new firebase.auth.GoogleAuthProvider();

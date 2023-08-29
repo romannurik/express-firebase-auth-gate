@@ -39,11 +39,7 @@ export interface Options {
    */
   firebaseConfig: {
     apiKey: string;
-    /**
-     * If not specified, will automatically use the browser's current host, which pairs well with using
-     * `firebaseAuthSigninHelpers` to host the firebase auth helper code on the same domain.
-     */
-    authDomain?: string;
+    authDomain: string;
     projectId: string;
   };
 
@@ -62,6 +58,15 @@ export interface Options {
    * Optional custom handler to run if access is forbidden (i.e. `authorized` returns false).
    */
   onForbidden?: RequestHandler;
+
+  /**
+   * If true, will automatically use the browser's current host instead of the provided
+   * `firebaseConfig.authDomain`, if possible. This should be used with `firebaseAuthSigninHelpers`
+   * to host the firebase auth helper code on the same domain. This currently no-ops when
+   * running on a custom port (e.g. `localhost:3000`), since `authDomain` must always serve on
+   * port 443.
+   */
+  selfHostedAuthHelper?: boolean;
 
   /**
    * Whether or not to always show the Google account picker. Defaults to false
